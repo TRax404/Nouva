@@ -2,10 +2,12 @@ import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { useTheme } from '../ThemeContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
+  const { theme, toggleTheme } = useTheme();
   const navRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -28,9 +30,9 @@ const Navbar = () => {
       width: isMobile ? '90%' : '50%',
       top: '20px',
       borderRadius: '50px',
-      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      backgroundColor: theme === 'dark' ? 'rgba(22, 23, 29, 0.8)' : 'rgba(255, 255, 255, 0.8)',
       backdropFilter: 'blur(15px)',
-      borderColor: 'rgba(255, 255, 255, 0.2)',
+      borderColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
       boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
       paddingLeft: isMobile ? '16px' : '24px',
       paddingRight: isMobile ? '16px' : '24px',
@@ -45,7 +47,7 @@ const Navbar = () => {
       ease: 'none'
     }, 0);
 
-  }, { scope: navRef });
+  }, { scope: navRef, dependencies: [theme] });
 
   useGSAP(() => {
     if (isOpen) {
@@ -80,42 +82,54 @@ const Navbar = () => {
           ref={containerRef}
           className="w-full max-w-[1200px] flex items-center justify-between px-6 py-4"
         >
-          <div className="text-xl sm:text-2xl font-bold text-white tracking-tighter shrink-0">
+          <div className="text-xl sm:text-2xl font-bold text-[var(--text-h)] tracking-tighter shrink-0">
             FASHION<span className="text-purple-500">.</span>
           </div>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex gap-6 lg:gap-8 text-sm font-medium text-white/80">
-            <li><a href="#" className="hover:text-white transition-colors relative group whitespace-nowrap">Collection
+          <ul className="hidden md:flex gap-6 lg:gap-8 text-sm font-medium text-[var(--text)]">
+            <li><a href="#" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">Collection
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </a></li>
-            <li><a href="#" className="hover:text-white transition-colors relative group whitespace-nowrap">Trends
+            <li><a href="#" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">Trends
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </a></li>
-            <li><a href="#" className="hover:text-white transition-colors relative group whitespace-nowrap">About
+            <li><a href="#" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">About
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </a></li>
-            <li><a href="#" className="hover:text-white transition-colors relative group whitespace-nowrap">Contact
+            <li><a href="#" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">Contact
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </a></li>
           </ul>
 
           <div className="flex items-center gap-4 shrink-0">
-            <button className="hidden sm:block px-5 py-2 text-xs lg:text-sm font-semibold text-white bg-white/10 
-                             hover:bg-purple-600 border border-white/30 rounded-full transition-all whitespace-nowrap">
+            <button 
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-[var(--accent-bg)] border border-[var(--accent-border)] text-[var(--accent)] hover:opacity-80 transition-all"
+              aria-label="Toggle Theme"
+            >
+              {theme === 'light' ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+              )}
+            </button>
+
+            <button className="hidden sm:block px-5 py-2 text-xs lg:text-sm font-semibold text-white bg-purple-600 
+                             hover:bg-purple-700 rounded-full transition-all whitespace-nowrap">
               Shop Now
             </button>
             
             {/* Mobile Menu Button */}
             <button 
               onClick={toggleMenu}
-              className="md:hidden z-[70] p-2 text-white focus:outline-none"
+              className="md:hidden z-[70] p-2 text-[var(--text-h)] focus:outline-none"
               aria-label="Toggle Menu"
             >
               <div className="w-6 h-5 relative flex flex-col justify-between overflow-hidden">
-                <span className={`w-full h-0.5 bg-white transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-                <span className={`w-full h-0.5 bg-white transition-all duration-300 ${isOpen ? 'translate-x-10' : ''}`}></span>
-                <span className={`w-full h-0.5 bg-white transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+                <span className={`w-full h-0.5 bg-current transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+                <span className={`w-full h-0.5 bg-current transition-all duration-300 ${isOpen ? 'translate-x-10' : ''}`}></span>
+                <span className={`w-full h-0.5 bg-current transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
               </div>
             </button>
           </div>
@@ -126,9 +140,9 @@ const Navbar = () => {
       <div 
         ref={menuRef}
         style={{ clipPath: 'circle(0% at 100% 0%)' }}
-        className="fixed inset-0 z-[55] bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center md:hidden"
+        className="fixed inset-0 z-[55] bg-[var(--bg)]/95 backdrop-blur-2xl flex flex-col items-center justify-center md:hidden"
       >
-        <ul className="flex flex-col gap-8 text-2xl font-bold text-white text-center">
+        <ul className="flex flex-col gap-8 text-2xl font-bold text-[var(--text-h)] text-center">
           <li className="mobile-link"><a href="#" onClick={toggleMenu}>Collection</a></li>
           <li className="mobile-link"><a href="#" onClick={toggleMenu}>Trends</a></li>
           <li className="mobile-link"><a href="#" onClick={toggleMenu}>About</a></li>
