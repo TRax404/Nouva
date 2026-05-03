@@ -14,39 +14,48 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useGSAP(() => {
-    const isMobile = window.innerWidth < 768;
+    const mm = gsap.matchMedia();
     
-    // Create the morphing timeline
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: 'body',
-        start: 'top top',
-        end: '+=200', // Animation finishes after 200px scroll
-        scrub: 1,      // Smoothly ties animation to scroll speed
-      }
+    mm.add({
+      isMobile: "(max-width: 767px)",
+      isTablet: "(min-width: 768px) and (max-width: 1023px)",
+      isDesktop: "(min-width: 1024px)"
+    }, (context) => {
+      const { isMobile, isTablet } = context.conditions as any;
+      
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: 'body',
+          start: 'top top',
+          end: '+=200',
+          scrub: 1,
+        }
+      });
+
+      tl.to(navRef.current, {
+        width: isMobile ? '90%' : isTablet ? '80%' : '50%',
+        top: '20px',
+        borderRadius: '50px',
+        backgroundColor: theme === 'dark' ? 'rgba(22, 23, 29, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+        backdropFilter: 'blur(15px)',
+        borderColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
+        paddingLeft: isMobile ? '16px' : '24px',
+        paddingRight: isMobile ? '16px' : '24px',
+        duration: 1,
+        ease: 'none'
+      });
+
+      tl.to(containerRef.current, {
+        maxWidth: '100%',
+        paddingTop: isMobile ? '12px' : isTablet ? '6px' : '16px',
+        paddingBottom: isMobile ? '12px' : isTablet ? '6px' : '16px',
+        duration: 1,
+        ease: 'none'
+      }, 0);
     });
 
-    tl.to(navRef.current, {
-      width: isMobile ? '90%' : '50%',
-      top: '20px',
-      borderRadius: '50px',
-      backgroundColor: theme === 'dark' ? 'rgba(22, 23, 29, 0.8)' : 'rgba(255, 255, 255, 0.8)',
-      backdropFilter: 'blur(15px)',
-      borderColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
-      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
-      paddingLeft: isMobile ? '16px' : '24px',
-      paddingRight: isMobile ? '16px' : '24px',
-      duration: 1,
-      ease: 'none'
-    });
-
-    // Also adjust the inner container if needed
-    tl.to(containerRef.current, {
-      maxWidth: '100%',
-      duration: 1,
-      ease: 'none'
-    }, 0);
-
+    return () => mm.revert();
   }, { scope: navRef, dependencies: [theme] });
 
   useGSAP(() => {
@@ -76,18 +85,18 @@ const Navbar = () => {
       <nav
         ref={navRef}
         className="fixed top-0 left-1/2 -translate-x-1/2 w-full z-[60] flex items-center justify-center 
-                   bg-transparent border border-transparent transition-colors duration-300"
+                   bg-transparent border border-transparent"
       >
         <div 
           ref={containerRef}
-          className="w-full max-w-[1200px] flex items-center justify-between px-6 py-4"
+          className="w-full max-w-[1200px] flex items-center justify-between px-6 py-4 md:py-2 lg:py-4"
         >
-          <div className="text-xl sm:text-2xl font-bold text-[var(--text-h)] tracking-tighter shrink-0">
+          <div className="text-xl md:text-lg lg:text-2xl font-bold text-[var(--text-h)] tracking-tighter shrink-0">
             FASHION<span className="text-purple-500">.</span>
           </div>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex gap-6 lg:gap-8 text-sm font-medium text-[var(--text)]">
+          <ul className="hidden md:flex gap-4 lg:gap-8 text-[13px] lg:text-sm font-medium text-[var(--text)]">
             <li><a href="#" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">Collection
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </a></li>
