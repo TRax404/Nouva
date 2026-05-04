@@ -8,7 +8,7 @@ import ThemeToggle from './ThemeToggle';
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const navRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
