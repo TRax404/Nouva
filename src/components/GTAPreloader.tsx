@@ -80,7 +80,7 @@ export const GTAPreloader = ({ onComplete }: { onComplete: () => void }) => {
   const rootRef = useRef<HTMLDivElement>(null)
   const logoRef = useRef<HTMLDivElement>(null)
   const traRef = useRef<HTMLSpanElement>(null)
-  const xRef = useRef<HTMLSpanElement>(null)
+  const xRef = useRef<SVGSVGElement>(null)
   const streakOneRef = useRef<HTMLSpanElement>(null)
   const streakTwoRef = useRef<HTMLSpanElement>(null)
   const reflectionRef = useRef<HTMLDivElement>(null)
@@ -106,12 +106,11 @@ export const GTAPreloader = ({ onComplete }: { onComplete: () => void }) => {
       )
       .fromTo(
         xRef.current,
-        { y: 36, opacity: 0, filter: 'blur(16px)', textShadow: '0 0 0 rgba(255, 62, 157, 0)' },
+        { y: 40, scale: 0.05, opacity: 0 },
         {
-          y: -34,
+          y: 0,
+          scale: 0.08,
           opacity: 1,
-          filter: 'blur(0px)',
-          textShadow: '0 0 20px rgba(255, 62, 157, 0.72), 0 0 54px rgba(199, 60, 255, 0.38)',
           duration: 1.45,
           ease: 'expo.out',
         },
@@ -152,7 +151,7 @@ export const GTAPreloader = ({ onComplete }: { onComplete: () => void }) => {
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.48)_0%,rgba(0,0,0,0.06)_44%,rgba(0,0,0,0.62)_100%)]" />
 
       <div className="absolute inset-0 flex items-center justify-center">
-        <div ref={logoRef} className="relative w-[min(78vw,720px)] text-center opacity-0 will-change-transform">
+        <div ref={logoRef} className="relative w-[min(78vw,720px)] text-center opacity-0 will-change-transform flex items-center justify-center space-x-3">
           <span
             ref={streakOneRef}
             className="absolute left-1/2 top-[43%] h-px w-[58%] origin-left -translate-x-1/2 bg-gradient-to-r from-transparent via-pink-200 to-transparent opacity-0 shadow-[0_0_24px_rgba(255,62,157,0.7)]"
@@ -162,21 +161,37 @@ export const GTAPreloader = ({ onComplete }: { onComplete: () => void }) => {
             className="absolute left-1/2 top-[56%] h-px w-[42%] origin-left -translate-x-1/2 bg-gradient-to-r from-transparent via-orange-200 to-transparent opacity-0 shadow-[0_0_20px_rgba(255,154,61,0.58)]"
           />
 
-          <div className="relative inline-flex items-baseline justify-center font-sans text-[clamp(4rem,15vw,11rem)] font-black leading-none tracking-[0.015em] text-white">
-            <span ref={traRef} className="inline-block translate-y-6 opacity-0 [text-shadow:0_0_18px_rgba(255,255,255,0.22)]">
+          <div className="relative inline-flex items-center justify-center font-sans text-[clamp(4rem,15vw,11rem)] leading-none tracking-tighter text-white">
+            <span ref={traRef} className="inline-block translate-y-6 opacity-0 [text-shadow:0_0_18px_rgba(255,255,255,0.22)]" style={{ fontFamily: '"Cormorant Garamond", serif', fontStyle: 'italic', fontWeight: 300 }}>
               TRa
             </span>
-            <span
+            
+            <svg 
               ref={xRef}
-              className="ml-[0.02em] inline-block translate-y-9 bg-gradient-to-br from-white via-[#ff4fa9] to-[#ff9a3d] bg-clip-text text-transparent opacity-0 will-change-transform"
+              viewBox="0 0 1000 1000" 
+              className="h-[2000px] w-[2000px] will-change-transform"
+              style={{ pointerEvents: 'none' }}
             >
-              X
-            </span>
+              <path 
+                d="M350 200 L450 200 L500 400 L550 200 L650 200 L550 500 L650 800 L550 800 L500 600 L450 800 L350 800 L450 500 Z" 
+                fill="none" 
+                stroke="url(#luxGradient)" 
+                strokeWidth="6"
+                strokeLinejoin="miter"
+              />
+              <defs>
+                <linearGradient id="luxGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#ffffff" />
+                  <stop offset="30%" stopColor="#ffd1e3" />
+                  <stop offset="100%" stopColor="#ffb37a" />
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
 
           <div
             ref={reflectionRef}
-            className="mx-auto mt-1 h-20 w-[72%] origin-top scale-y-75 bg-[linear-gradient(180deg,rgba(255,255,255,0.22),rgba(255,62,157,0.08)_40%,transparent_82%)] opacity-0 [mask-image:linear-gradient(180deg,black,transparent)]"
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-1 h-20 w-[72%] origin-top scale-y-75 bg-[linear-gradient(180deg,rgba(255,255,255,0.22),rgba(255,62,157,0.08)_40%,transparent_82%)] opacity-0 [mask-image:linear-gradient(180deg,black,transparent)]"
           />
         </div>
       </div>
