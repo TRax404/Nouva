@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SplitType from 'split-type'
 import Navbar from './components/Navbar'
 import { SmoothScroll } from './components/SmoothScroll'
-import { TRaxLoader } from './components/TRaxLoader'
+import { GTAPreloader } from './components/GTAPreloader'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -39,19 +39,15 @@ function App() {
   }, [isIntroComplete])
 
   const handlePreloaderComplete = () => {
-    // The TRaxLoader handles its own fade out/expansion reveal
-    // We just need to mark the intro as complete and hide the container
-    gsap.to(preloaderContainerRef.current, {
-      display: 'none',
-      delay: 0.8,
-      onStart: () => setIsIntroComplete(true)
-    });
+    // The GTAPreloader handles its own fade out
+    setIsIntroComplete(true)
+    gsap.set(preloaderContainerRef.current, { display: 'none', delay: 1.2 })
   };
 
   return (
     <>
       <div ref={preloaderContainerRef} className="fixed inset-0 z-[200]">
-        <TRaxLoader onComplete={handlePreloaderComplete} />
+        <GTAPreloader onComplete={handlePreloaderComplete} />
       </div>
 
       <SmoothScroll>
