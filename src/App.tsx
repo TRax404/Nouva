@@ -20,6 +20,32 @@ function App() {
     // We only initialize main animations after the intro is complete
     if (isIntroComplete) {
       const ctx = gsap.context(() => {
+        // Specific Hero Title Animation
+        const heroTitle = document.querySelector('.hero-title')
+        if (heroTitle) {
+          const text = new SplitType(heroTitle as HTMLElement, { types: 'chars,words' })
+          gsap.from(text.chars, {
+            y: 100,
+            opacity: 0,
+            filter: 'blur(20px)',
+            rotateX: -20,
+            stagger: 0.04,
+            duration: 2.5,
+            ease: 'power4.out',
+            delay: 0.2
+          })
+          
+          // Subtle float animation for the hero title after it appears
+          gsap.to(heroTitle, {
+            y: -10,
+            duration: 3,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true,
+            delay: 2
+          })
+        }
+
         const splitTargets = document.querySelectorAll('.split-text')
         splitTargets.forEach((target) => {
           const text = new SplitType(target as HTMLElement, { types: 'chars,words' })
@@ -61,7 +87,7 @@ function App() {
             <section className="min-h-screen flex flex-col items-center justify-center text-center px-6">
               <div className="max-w-5xl w-full">
                 <span className="block mb-8 text-[10px] md:text-xs tracking-[0.5em] opacity-50 uppercase font-bold">Est. 2026 — Global Excellence</span>
-                <h1 className="text-[13vw] md:text-[11vw] mb-12 split-text leading-[0.8] tracking-tighter text-[var(--text-h)]">
+                <h1 className="text-[13vw] md:text-[11vw] mb-12 hero-title leading-[0.8] tracking-tighter text-[var(--text-h)]">
                   TRax<br /><span className="italic serif font-light text-pink-500">Luxury</span>
                 </h1>
                 <div className="flex flex-wrap justify-center gap-6 md:gap-12 mt-12 opacity-40 text-[9px] md:text-[10px] uppercase tracking-[0.3em] font-semibold">
