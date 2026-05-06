@@ -7,6 +7,7 @@ import { SmoothScroll } from './components/SmoothScroll'
 import { GTAPreloader } from './components/GTAPreloader'
 import FashionCardsSection from './components/FashionCardsSection'
 import CommentSection from './components/CommentSection'
+import VideoShowcaseSection from './components/VideoShowcaseSection'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -96,6 +97,8 @@ function App() {
                 </div>
               </div>
             </section>
+
+            <VideoShowcaseSection />
 
             <FashionCardsSection />
             
