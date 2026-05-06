@@ -2,13 +2,10 @@ import { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { useTheme } from '../ThemeContext';
-import ThemeToggle from './ThemeToggle';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
-  const { theme } = useTheme();
   const navRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -37,9 +34,9 @@ const Navbar = () => {
         width: isMobile ? '90%' : isTablet ? '80%' : '50%',
         top: '20px',
         borderRadius: '50px',
-        backgroundColor: theme === 'dark' ? 'rgba(22, 23, 29, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+        backgroundColor: 'rgba(22, 23, 29, 0.8)',
         backdropFilter: 'blur(15px)',
-        borderColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+        borderColor: 'rgba(255, 255, 255, 0.1)',
         boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
         paddingLeft: isMobile ? '16px' : '24px',
         paddingRight: isMobile ? '16px' : '24px',
@@ -57,7 +54,7 @@ const Navbar = () => {
     });
 
     return () => mm.revert();
-  }, { scope: navRef, dependencies: [theme] });
+  }, { scope: navRef });
 
   useGSAP(() => {
     if (isOpen) {
@@ -113,8 +110,6 @@ const Navbar = () => {
           </ul>
 
           <div className="flex items-center gap-4 shrink-0">
-            <ThemeToggle />
-
             <button className="hidden sm:block px-5 py-2 text-xs lg:text-sm font-semibold text-white bg-purple-600 
                              hover:bg-purple-700 rounded-full transition-all whitespace-nowrap">
               Shop Now

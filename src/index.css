@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --text: #1a1a1a;
-  --text-h: #000000;
-  --bg: #ffffff;
-  --border: #e5e5e5;
-  --accent: #000000;
-  --accent-bg: rgba(0, 0, 0, 0.05);
+  --text: #e2e2e7;
+  --text-h: #ffffff;
+  --bg: #0d0d12;
+  --border: #1e1e26;
+  --accent: #ff3e9d;
+  --accent-bg: rgba(255, 62, 157, 0.05);
 
   --sans: 'Inter', system-ui, sans-serif;
   --serif: 'Cormorant Garamond', serif;
@@ -15,15 +15,6 @@
   color: var(--text);
   background: var(--bg);
   overflow-x: hidden;
-}
-
-html.dark {
-  --text: #e5e5e5;
-  --text-h: #ffffff;
-  --bg: #0a0a0a;
-  --border: #262626;
-  --accent: #ffffff;
-  --accent-bg: rgba(255, 255, 255, 0.05);
 }
 
 @media (pointer: fine) {
@@ -35,6 +26,11 @@ html.dark {
 body {
   margin: 0;
   padding: 0;
+  background-color: var(--bg);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(255, 62, 157, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(199, 60, 255, 0.02) 0%, transparent 50%);
+  background-attachment: fixed;
 }
 
 h1, h2, h3, h4, .serif {
@@ -114,4 +110,3 @@ section {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
-
