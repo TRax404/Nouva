@@ -95,10 +95,66 @@ function App() {
               </div>
             </section>
 
-            <footer className="py-24 px-10 border-t border-[var(--border)] bg-[var(--bg)] flex flex-col md:flex-row justify-between items-center gap-12">
-              <h2 className="text-2xl font-black tracking-[0.6em] text-[var(--text-h)]">TRax.</h2>
-              <div className="flex gap-16 text-[10px] uppercase tracking-[0.3em] font-bold opacity-50"><a href="#">Instagram</a><a href="#">Archive</a><a href="#">Contact</a></div>
-              <p className="text-[9px] uppercase tracking-[0.4em] opacity-30">© 2026 TRax Studio</p>
+            <footer className="relative bg-black pt-40 pb-20 px-6 md:px-12 overflow-hidden text-white">
+              {/* Background Glow */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-pink-500/50 to-transparent" />
+              <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80%] h-[500px] bg-pink-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+              <div className="max-w-7xl mx-auto relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-20 items-end">
+                  {/* Left Column: Huge Branding */}
+                  <div className="md:col-span-7">
+                    <h2 className="text-[22vw] md:text-[16vw] font-black leading-[0.7] tracking-tighter mix-blend-difference">
+                      TRax<span className="text-pink-500">.</span>
+                    </h2>
+                  </div>
+
+                  {/* Right Column: Nav & Info */}
+                  <div className="md:col-span-5 grid grid-cols-2 gap-12 pb-4">
+                    <div className="space-y-8">
+                      <h4 className="text-[10px] uppercase tracking-[0.5em] font-bold text-neutral-500">Collections</h4>
+                      <ul className="space-y-4 text-sm font-medium">
+                        <li><a href="#" className="hover:text-pink-500 transition-colors duration-300">Winter 2026</a></li>
+                        <li><a href="#" className="hover:text-pink-500 transition-colors duration-300">Archive</a></li>
+                        <li><a href="#" className="hover:text-pink-500 transition-colors duration-300">Limited Drop</a></li>
+                      </ul>
+                    </div>
+                    <div className="space-y-8">
+                      <h4 className="text-[10px] uppercase tracking-[0.5em] font-bold text-neutral-500">Studio</h4>
+                      <ul className="space-y-4 text-sm font-medium">
+                        <li><a href="#" className="hover:text-pink-500 transition-colors duration-300">Instagram</a></li>
+                        <li><a href="#" className="hover:text-pink-500 transition-colors duration-300">Journal</a></li>
+                        <li><a href="#" className="hover:text-pink-500 transition-colors duration-300">Contact</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bottom Bar */}
+                <div className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
+                  <div className="flex items-center gap-12 text-[10px] uppercase tracking-[0.3em] font-bold text-neutral-500">
+                    <span>Paris / NYC / Tokyo</span>
+                    <span className="hidden md:inline w-1 h-1 bg-white/20 rounded-full" />
+                    <span className="hidden md:inline uppercase">Available 24/7</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-8">
+                    <button 
+                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                      className="group flex items-center gap-4 text-[10px] uppercase tracking-[0.5em] font-black hover:text-pink-500 transition-all"
+                    >
+                      Top
+                      <span className="w-8 h-px bg-white/30 group-hover:w-12 group-hover:bg-pink-500 transition-all" />
+                    </button>
+                    <p className="text-[10px] uppercase tracking-[0.3em] font-bold opacity-30">© 2026 TRax Studio</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Decorative Large Text in Background */}
+              <div className="absolute bottom-[-10%] right-[-5%] text-[30vw] font-black text-white/[0.02] select-none pointer-events-none leading-none">
+                AURA
+              </div>
             </footer>
           </main>
         </div>
