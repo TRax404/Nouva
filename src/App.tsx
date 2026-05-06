@@ -5,6 +5,8 @@ import SplitType from 'split-type'
 import Navbar from './components/Navbar'
 import { SmoothScroll } from './components/SmoothScroll'
 import { GTAPreloader } from './components/GTAPreloader'
+import FashionCardsSection from './components/FashionCardsSection'
+import CommentSection from './components/CommentSection'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -94,6 +96,10 @@ function App() {
                 </div>
               </div>
             </section>
+
+            <FashionCardsSection />
+            
+            <CommentSection />
 
             <footer className="relative bg-black pt-40 pb-20 px-6 md:px-12 overflow-hidden text-white">
               {/* Background Glow */}
