@@ -9,6 +9,7 @@ import FashionCardsSection from './components/FashionCardsSection'
 import CommentSection from './components/CommentSection'
 import VideoShowcaseSection from './components/VideoShowcaseSection'
 import CustomCursor from './components/CustomCursor'
+import SnowParticles from './components/SnowParticles'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -79,6 +80,7 @@ function App() {
   return (
     <>
       <CustomCursor />
+      <SnowParticles />
       
       <div ref={preloaderContainerRef} className="fixed inset-0 z-[200]">
         <GTAPreloader onComplete={handlePreloaderComplete} />
