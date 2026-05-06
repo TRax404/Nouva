@@ -19,6 +19,7 @@ const FashionCard: React.FC<FashionCardProps> = ({ image, title, description, co
     <div 
       ref={cardRef}
       className="fashion-card shrink-0 w-[85vw] md:w-[65vw] lg:w-[45vw] h-[70vh] relative group overflow-hidden bg-neutral-900 mx-4 md:mx-8"
+      data-cursor="View"
     >
       {/* Parallax Image Container */}
       <div className="absolute inset-0 overflow-hidden">

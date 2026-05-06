@@ -98,6 +98,7 @@ const VideoShowcaseSection: React.FC = () => {
       <div 
         ref={videoContainerRef}
         className="absolute inset-0 z-0 overflow-hidden will-change-transform"
+        data-cursor="Play"
       >
         <video
           ref={videoRef}

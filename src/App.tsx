@@ -8,6 +8,7 @@ import { GTAPreloader } from './components/GTAPreloader'
 import FashionCardsSection from './components/FashionCardsSection'
 import CommentSection from './components/CommentSection'
 import VideoShowcaseSection from './components/VideoShowcaseSection'
+import CustomCursor from './components/CustomCursor'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -24,26 +25,28 @@ function App() {
         const heroTitle = document.querySelector('.hero-title')
         if (heroTitle) {
           const text = new SplitType(heroTitle as HTMLElement, { types: 'chars,words' })
-          gsap.from(text.chars, {
-            y: 100,
-            opacity: 0,
-            filter: 'blur(20px)',
-            rotateX: -20,
-            stagger: 0.04,
-            duration: 2.5,
-            ease: 'power4.out',
-            delay: 0.2
-          })
           
-          // Subtle float animation for the hero title after it appears
-          gsap.to(heroTitle, {
-            y: -10,
-            duration: 3,
-            ease: 'sine.inOut',
-            repeat: -1,
-            yoyo: true,
-            delay: 2
-          })
+          // Set initial visibility (handles both opacity and visibility)
+          gsap.set(heroTitle, { autoAlpha: 1 })
+          
+          gsap.fromTo(text.chars, 
+            {
+              y: 80,
+              opacity: 0,
+              filter: 'blur(15px)',
+              rotateX: -10,
+            },
+            {
+              y: 0,
+              opacity: 1,
+              filter: 'blur(0px)',
+              rotateX: 0,
+              stagger: 0.03,
+              duration: 2.2,
+              ease: 'expo.out',
+              delay: 0.8
+            }
+          )
         }
 
         const splitTargets = document.querySelectorAll('.split-text')
@@ -75,6 +78,8 @@ function App() {
 
   return (
     <>
+      <CustomCursor />
+      
       <div ref={preloaderContainerRef} className="fixed inset-0 z-[200]">
         <GTAPreloader onComplete={handlePreloaderComplete} />
       </div>
@@ -118,7 +123,7 @@ function App() {
                     <span className="w-12 h-[1px] bg-[var(--text)] transition-all group-hover:w-24"></span>
                   </button>
                 </div>
-                <div className="md:col-start-7 md:col-span-6 reveal-container aspect-[4/5] bg-neutral-100 order-1 md:order-2 shadow-2xl border border-[var(--border)]">
+                <div className="md:col-start-7 md:col-span-6 reveal-container aspect-[4/5] bg-neutral-100 order-1 md:order-2 shadow-2xl border border-[var(--border)]" data-cursor="View">
                   <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=1200" alt="TRax Fashion" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" />
                 </div>
               </div>

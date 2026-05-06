@@ -7,7 +7,7 @@
   --border: #e5e5e5;
   --accent: #000000;
   --accent-bg: rgba(0, 0, 0, 0.05);
-  
+
   --sans: 'Inter', system-ui, sans-serif;
   --serif: 'Cormorant Garamond', serif;
 
@@ -26,6 +26,12 @@ html.dark {
   --accent-bg: rgba(255, 255, 255, 0.05);
 }
 
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -37,6 +43,10 @@ h1, h2, h3, h4, .serif {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-h);
+}
+.hero-title {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .luxury-text {
@@ -101,7 +111,7 @@ section {
 .lenis.lenis-stopped {
   overflow: hidden;
 }
-
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
+
