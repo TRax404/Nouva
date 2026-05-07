@@ -1,33 +1,17 @@
+// import React from 'react';
+// import { ThemeContext, Theme } from './contexts/ThemeContext';
 
-import React, { createContext, useContext } from 'react';
+// export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+//   const theme: Theme = 'dark';
 
-type Theme = 'dark';
+//   const toggleTheme = () => {
+//     // No-op
+//   };
 
-interface ThemeContextType {
-  theme: Theme;
-  toggleTheme: () => void;
-}
+//   return (
+//     <ThemeContext.Provider value={{ theme, toggleTheme }}>
+//       {children}
+//     </ThemeContext.Provider>
+//   );
+// };
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const theme: Theme = 'dark';
-
-  const toggleTheme = () => {
-    // No-op
-  };
-
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
-
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
-};

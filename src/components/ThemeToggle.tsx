@@ -1,12 +1,12 @@
 import React from 'react';
-import { useTheme } from '../ThemeContext';
+import { useTheme } from '../hooks/useTheme';
 
 const ThemeToggle: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <button
-      onClick={(e) => toggleTheme(e)}
+      onClick={() => toggleTheme()}
       className="relative p-2.5 rounded-xl bg-[var(--accent-bg)] border border-[var(--accent-border)] text-[var(--accent)] hover:scale-105 active:scale-95 transition-all duration-300 group overflow-hidden shadow-sm hover:shadow-md"
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
     >

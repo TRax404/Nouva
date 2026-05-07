@@ -19,7 +19,9 @@ const Navbar = () => {
       isTablet: "(min-width: 768px) and (max-width: 1023px)",
       isDesktop: "(min-width: 1024px)"
     }, (context) => {
-      const { isMobile, isTablet } = context.conditions as any;
+      const conditions = context.conditions as Record<string, boolean>;
+      const isMobile = conditions.isMobile;
+      const isTablet = conditions.isTablet;
       
       const tl = gsap.timeline({
         scrollTrigger: {

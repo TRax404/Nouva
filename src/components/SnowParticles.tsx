@@ -72,7 +72,7 @@ const SnowParticles: React.FC = () => {
       vx: number;
       vy: number;
 
-      constructor(width: number, height: number) {
+      constructor(width: number) {
         // Broaden entry points
         this.x = Math.random() * width;
         this.y = -200;
@@ -143,7 +143,7 @@ const SnowParticles: React.FC = () => {
 
       // Periodic "light way" star streaks
       if (Math.random() < 0.01) { // Slightly less frequent
-        streaks.push(new Streak(canvas.width, canvas.height));
+        streaks.push(new Streak(canvas.width));
       }
 
       streaks = streaks.filter(streak => {

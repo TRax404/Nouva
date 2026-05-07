@@ -1,32 +1,35 @@
-import { Suspense, useMemo, useRef } from 'react'
+import { Suspense, useRef } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
+
 import { Environment, MeshReflectorMaterial, PerspectiveCamera, Float } from '@react-three/drei'
 import { EffectComposer, Bloom, Noise, Vignette, ChromaticAberration } from '@react-three/postprocessing'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import * as THREE from 'three'
 
+const generateParticles = () => {
+  const count = 1200
+  const positions = new Float32Array(count * 3)
+
+  for (let i = 0; i < count; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 12
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 8
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 6 - 2
+  }
+
+  return positions
+}
+
+const PARTICLES = generateParticles()
+
 const LoaderScene = () => {
   const particlesRef = useRef<THREE.Points>(null)
   const gradientRef = useRef<THREE.Mesh>(null)
   const { mouse } = useThree()
 
-  const particles = useMemo(() => {
-    const count = 1200
-    const positions = new Float32Array(count * 3)
-
-    for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 12
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 8
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 6 - 2
-    }
-
-    return positions
-  }, [])
-
   useFrame((state) => {
     const time = state.clock.getElapsedTime()
-    
+
     // Smooth camera parallax
     state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, mouse.x * 0.5, 0.05)
     state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, mouse.y * 0.3, 0.05)
@@ -35,7 +38,7 @@ const LoaderScene = () => {
     if (particlesRef.current) {
       particlesRef.current.rotation.y = time * 0.02
       particlesRef.current.rotation.z = time * 0.01
-      
+
       const positions = particlesRef.current.geometry.attributes.position.array as Float32Array
       for (let i = 0; i < positions.length; i += 3) {
         positions[i + 1] += Math.sin(time + positions[i]) * 0.002
@@ -66,14 +69,14 @@ const LoaderScene = () => {
 
       <points ref={particlesRef}>
         <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[particles, 3]} />
+          <bufferAttribute attach="attributes-position" args={[PARTICLES, 3]} />
         </bufferGeometry>
-        <pointsMaterial 
-          size={0.015} 
-          color="#fff1fb" 
-          transparent 
-          opacity={0.4} 
-          sizeAttenuation 
+        <pointsMaterial
+          size={0.015}
+          color="#fff1fb"
+          transparent
+          opacity={0.4}
+          sizeAttenuation
           depthWrite={false}
           blending={THREE.AdditiveBlending}
         />
@@ -131,7 +134,7 @@ export const GTAPreloader = ({ onComplete }: { onComplete: () => void }) => {
 
     tl.to(containerRef.current, { opacity: 1, duration: 1 })
       .to(logoRef.current, { opacity: 1, duration: 0.1 }, 0.2)
-      
+
       // 1. Reveal TRa with elegant blur transition
       .to(traRef.current, {
         y: 0,
@@ -172,14 +175,14 @@ export const GTAPreloader = ({ onComplete }: { onComplete: () => void }) => {
         filter: 'blur(4px)',
         duration: 1.5
       }, 1.2)
-      
+
       // 5. Grand expansion for exit
       .to(logoRef.current, {
         scale: 1.1,
         duration: 4,
         ease: 'sine.inOut'
       }, 0.5)
-      
+
       .to(xRef.current, {
         scale: 1.2,
         opacity: 0,
@@ -220,7 +223,7 @@ export const GTAPreloader = ({ onComplete }: { onComplete: () => void }) => {
 
       <div ref={containerRef} className="absolute inset-0 flex items-center justify-center opacity-0">
         <div ref={logoRef} className="relative w-full max-w-4xl px-4 flex items-center justify-center opacity-0 will-change-transform">
-          
+
           {/* Animated Streaks */}
           <span
             ref={streakOneRef}
@@ -233,25 +236,25 @@ export const GTAPreloader = ({ onComplete }: { onComplete: () => void }) => {
 
           <div className="relative flex items-center justify-center">
             {/* TRa Text */}
-            <span 
-              ref={traRef} 
+            <span
+              ref={traRef}
               className="relative z-10 text-[clamp(4rem,12vw,10rem)] leading-none tracking-tighter text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.3)]"
               style={{ fontFamily: '"Cormorant Garamond", serif', fontStyle: 'italic', fontWeight: 300 }}
             >
               TRa
             </span>
-            
+
             {/* The X - Positioned absolutely relative to the container */}
-            <svg 
+            <svg
               ref={xRef}
-              viewBox="0 0 1000 1000" 
+              viewBox="0 0 1000 1000"
               className="absolute left-1/2 top-1/2 h-[2000px] w-[2000px] -translate-x-1/2 -translate-y-1/2 will-change-transform"
               style={{ pointerEvents: 'none' }}
             >
-              <path 
-                d="M350 200 L450 200 L500 400 L550 200 L650 200 L550 500 L650 800 L550 800 L500 600 L450 800 L350 800 L450 500 Z" 
-                fill="none" 
-                stroke="url(#luxGradient)" 
+              <path
+                d="M350 200 L450 200 L500 400 L550 200 L650 200 L550 500 L650 800 L550 800 L500 600 L450 800 L350 800 L450 500 Z"
+                fill="none"
+                stroke="url(#luxGradient)"
                 strokeWidth="6"
                 strokeLinejoin="miter"
               />
@@ -273,7 +276,7 @@ export const GTAPreloader = ({ onComplete }: { onComplete: () => void }) => {
           />
         </div>
       </div>
-      
+
       {/* Cinematic Grain */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.03] mix-blend-overlay">
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
