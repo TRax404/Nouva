@@ -95,16 +95,16 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex gap-4 lg:gap-8 text-[13px] lg:text-sm font-medium text-[var(--text)]">
-            <li><a href="#" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">Collection
+            <li><a href="#fashion-collection" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">Collection
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </a></li>
-            <li><a href="#" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">Trends
+            <li><a href="#fashion-trends" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">Trends
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </a></li>
-            <li><a href="#" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">About
+            <li><a href="#about-us" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">About
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </a></li>
-            <li><a href="#" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">Contact
+            <li><a href="#contact-us" className="hover:text-[var(--text-h)] transition-colors relative group whitespace-nowrap">Contact
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </a></li>
           </ul>
@@ -138,10 +138,10 @@ const Navbar = () => {
         className="fixed inset-0 z-[55] bg-[var(--bg)]/95 backdrop-blur-2xl flex flex-col items-center justify-center md:hidden"
       >
         <ul className="flex flex-col gap-8 text-2xl font-bold text-[var(--text-h)] text-center">
-          <li className="mobile-link"><a href="#" onClick={toggleMenu}>Collection</a></li>
-          <li className="mobile-link"><a href="#" onClick={toggleMenu}>Trends</a></li>
-          <li className="mobile-link"><a href="#" onClick={toggleMenu}>About</a></li>
-          <li className="mobile-link"><a href="#" onClick={toggleMenu}>Contact</a></li>
+          <li className="mobile-link"><a href="#fashion-collection" onClick={toggleMenu}>Collection</a></li>
+          <li className="mobile-link"><a href="#fashion-trends" onClick={toggleMenu}>Trends</a></li>
+          <li className="mobile-link"><a href="#about-us" onClick={toggleMenu}>About</a></li>
+          <li className="mobile-link"><a href="#contact-us" onClick={toggleMenu}>Contact</a></li>
           <li className="mobile-link pt-4">
             <button className="px-8 py-3 text-lg font-semibold text-white bg-purple-600 rounded-full">
               Shop Now

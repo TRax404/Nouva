@@ -104,7 +104,7 @@ function App() {
             </section>
 
             {/* Manifesto Section */}
-            <section className="py-40 px-6 border-y border-[var(--border)] bg-[var(--accent-bg)]">
+            <section id="about-us" className="py-40 px-6 border-y border-[var(--border)] bg-[var(--accent-bg)]">
               <div className="max-w-5xl mx-auto text-center md:text-left">
                 <h2 className="text-3xl md:text-6xl leading-[1.1] split-text serif italic font-light text-[var(--text-h)]">
                   "Movement is our manifesto. TRax defines the path for the modern wanderer."
@@ -131,13 +131,17 @@ function App() {
               </div>
             </section>
 
-            <VideoShowcaseSection />
+            <div id="fashion-trends">
+              <VideoShowcaseSection />
+            </div>
 
-            <FashionCardsSection />
+            <div id="fashion-collection">
+              <FashionCardsSection />
+            </div>
             
             <CommentSection />
 
-            <footer className="relative bg-black pt-40 pb-20 px-6 md:px-12 overflow-hidden text-white">
+            <footer id="contact-us" className="relative bg-black pt-40 pb-20 px-6 md:px-12 overflow-hidden text-white">
               {/* Background Glow */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-pink-500/50 to-transparent" />
               <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[80%] h-[500px] bg-pink-500/5 blur-[120px] rounded-full pointer-events-none" />
